@@ -14,6 +14,9 @@
 
 import UIKit
 import AVFoundation
+import UserNotifications
+import UserNotificationsUI
+import NotificationCenter
 
 class ViewController: UIViewController {
     //first timer
@@ -27,7 +30,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var goButton1: UIButton!
     
-    @IBOutlet var pauseButton1: UIButton!
+    //@IBOutlet var pauseButton1: UIButton!
     
     @IBOutlet var resetButton1: UIButton!
     
@@ -36,7 +39,6 @@ class ViewController: UIViewController {
     var isRunning1 = false
     var resumeTapped1 = false
     var sec1 = 0
-    let systemSoundID1: SystemSoundID = 1016
     var tappedOk1 = false
     
     //second timer
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var goButton2: UIButton!
     
-    @IBOutlet var pauseButton2: UIButton!
+    //@IBOutlet var pauseButton2: UIButton!
     
     @IBOutlet var resetButton2: UIButton!
     
@@ -58,8 +60,8 @@ class ViewController: UIViewController {
     var isRunning2 = false
     var resumeTapped2 = false
     var sec2 = 0
-    let systemSoundID2: SystemSoundID = 1050
     var tappedOk2 = false
+    var fireDate2 = Date()
     
     //third timer
     
@@ -73,7 +75,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var goButton3: UIButton!
     
-    @IBOutlet var pauseButton3: UIButton!
+    //@IBOutlet var pauseButton3: UIButton!
     
     @IBOutlet var resetButton3: UIButton!
     
@@ -81,23 +83,19 @@ class ViewController: UIViewController {
     var isRunning3 = false
     var resumeTapped3 = false
     var sec3 = 0
-    let systemSoundID3: SystemSoundID = 1074
     var tappedOk3 = false
+    var fireDate3 = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        pauseButton1.isEnabled = false
         hours1.keyboardType = .numberPad
         minutes1.keyboardType = .numberPad
         seconds1.keyboardType = .numberPad
 
-        pauseButton2.isEnabled = false
         hours2.keyboardType = .numberPad
         minutes2.keyboardType = .numberPad
         seconds2.keyboardType = .numberPad
         
-        pauseButton3.isEnabled = false
         hours3.keyboardType = .numberPad
         minutes3.keyboardType = .numberPad
         seconds3.keyboardType = .numberPad
@@ -113,6 +111,7 @@ class ViewController: UIViewController {
         sec1 = CalculateSeconds(hoursT: hours1,minutesT: minutes1,secondsT: seconds1)
         runTimer1()
         goButton1.isEnabled = false
+        //setNotif1()
         setNotif1()
         }
     }
@@ -122,6 +121,7 @@ class ViewController: UIViewController {
             sec2 = CalculateSeconds(hoursT: hours2,minutesT: minutes2,secondsT: seconds2)
             runTimer2()
             goButton2.isEnabled = false
+            setNotif2()
         }
 
         
@@ -131,6 +131,7 @@ class ViewController: UIViewController {
             sec3 = CalculateSeconds(hoursT: hours3,minutesT: minutes3,secondsT: seconds3)
             runTimer3()
             goButton3.isEnabled = false
+            setNotif3()
         }
 
         
@@ -164,81 +165,93 @@ class ViewController: UIViewController {
         
         let notification = UILocalNotification()
         notification.fireDate = someTime
-        notification.alertBody = "Alarm 1 Finished!" // text that will be displayed in the notification
+        notification.alertBody = "Timer 1 Finished!" // text that will be displayed in the notification
         notification.soundName = "mountainAlarm.wav"
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
+    func setNotif2(){
+        let currentTime = Date()
+        let someTime = Date(timeInterval: TimeInterval(sec2), since: currentTime)
+        
+        print(currentTime)
+        print(someTime)
+        
+        let notification = UILocalNotification()
+        notification.fireDate = someTime
+        notification.alertBody = "Timer 2 Finished!" // text that will be displayed in the notification
+        notification.soundName = "bicycleAlarm.wav"
+        UIApplication.shared.scheduleLocalNotification(notification)
+    }
+    
+    func setNotif3(){
+        let currentTime = Date()
+        let someTime = Date(timeInterval: TimeInterval(sec3), since: currentTime)
+        
+        print(currentTime)
+        print(someTime)
+        
+        let notification = UILocalNotification()
+        notification.fireDate = someTime
+        notification.alertBody = "Timer 3 Finished!" // text that will be displayed in the notification
+        notification.soundName = "heavyAlarm.wav"
+        UIApplication.shared.scheduleLocalNotification(notification)
+    }
     
     
     func runTimer1(){
         timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer1)), userInfo: nil, repeats: true)
         isRunning1 = true
-        pauseButton1.isEnabled = true
+        //pauseButton1.isEnabled = true
     }
     func runTimer2(){
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer2)), userInfo: nil, repeats: true)
         isRunning2 = true
-        pauseButton2.isEnabled = true
+        //pauseButton2.isEnabled = true
     }
     func runTimer3(){
         timer3 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer3)), userInfo: nil, repeats: true)
         isRunning3 = true
-        pauseButton3.isEnabled = true
+        //pauseButton3.isEnabled = true
     }
     
-    
-    @IBAction func clickPause1(_ sender: Any) {
-        if self.resumeTapped1 == false {
-            timer1.invalidate()
-            isRunning1 = false
-            self.resumeTapped1 = true
-            self.pauseButton1.setTitle("Resume",for: .normal)
-        } else {
-            runTimer1()
-            self.resumeTapped1 = false
-            isRunning1 = true
-            self.pauseButton1.setTitle("Pause",for: .normal)
-        }
-    }
-    
-    @IBAction func clickPause2(_ sender: Any) {
-        if self.resumeTapped2 == false {
-            timer2.invalidate()
-            isRunning2 = false
-            self.resumeTapped2 = true
-            self.pauseButton2.setTitle("Resume",for: .normal)
-        } else {
-            runTimer2()
-            self.resumeTapped2 = false
-            isRunning2 = true
-            self.pauseButton2.setTitle("Pause",for: .normal)
-        }
+    func newNotif1(){
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.body = "Timer 1 Finished!"
+        //custom sound not working ;(
+        content.sound = UNNotificationSound.init(named: "mountainAlarm.caf")
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(sec1), repeats: false)
+        let request = UNNotificationRequest(identifier: "Alarm1", content: content, trigger: trigger)
+        center.add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                // Something went wrong
+            }
+        })
 
-    }
-    
-    @IBAction func clickPause3(_ sender: Any) {
-        if self.resumeTapped3 == false {
-            timer3.invalidate()
-            isRunning3 = false
-            self.resumeTapped3 = true
-            self.pauseButton3.setTitle("Resume",for: .normal)
-        } else {
-            runTimer3()
-            self.resumeTapped3 = false
-            isRunning3 = true
-            self.pauseButton3.setTitle("Pause",for: .normal)
-        }
-
+        
     }
     
     @IBAction func clickReset1(_ sender: Any) {
+        //timer stuff
         timer1.invalidate()
         sec1 = 0
         countdownLabel1.text = timeString(time: TimeInterval(sec1))
         isRunning1 = false
-        pauseButton1.isEnabled = false
+        //pauseButton1.isEnabled = false
         goButton1.isEnabled = true
+        
+        //nofication stuff
+        let app: UIApplication = UIApplication.shared
+        for event in app.scheduledLocalNotifications!{
+            let notification = event as UILocalNotification
+            if(notification.alertBody == "Timer 1 Finished!"){
+                app.cancelLocalNotification(notification)
+                break;
+            }
+        }
+        
         
     }
     
@@ -247,8 +260,18 @@ class ViewController: UIViewController {
         sec2 = 0
         countdownLabel2.text = timeString(time: TimeInterval(sec2))
         isRunning2 = false
-        pauseButton2.isEnabled = false
+        //pauseButton2.isEnabled = false
         goButton2.isEnabled = true
+        
+        //nofication stuff
+        let app: UIApplication = UIApplication.shared
+        for event in app.scheduledLocalNotifications!{
+            let notification = event as UILocalNotification
+            if(notification.alertBody == "Timer 2 Finished!"){
+                app.cancelLocalNotification(notification)
+                break;
+            }
+        }
 
         
     }
@@ -257,8 +280,18 @@ class ViewController: UIViewController {
         sec3 = 0
         countdownTimer3.text = timeString(time: TimeInterval(sec3))
         isRunning3 = false
-        pauseButton3.isEnabled = false
+        //pauseButton3.isEnabled = false
         goButton3.isEnabled = true
+        
+        //nofication stuff
+        let app: UIApplication = UIApplication.shared
+        for event in app.scheduledLocalNotifications!{
+            let notification = event as UILocalNotification
+            if(notification.alertBody == "Timer 3 Finished!"){
+                app.cancelLocalNotification(notification)
+                break;
+            }
+        }
 
     }
     
@@ -266,49 +299,7 @@ class ViewController: UIViewController {
     func updateTimer1() {
         if sec1 < 1 {
             timer1.invalidate()
-            self.tappedOk1 = false
-            var presenting = false
-            
-            DispatchQueue.global(qos: .background).async {
-                print("Run on background thread")
-                for _ in 0 ... 15{
-                    if(self.tappedOk1 == false){
-                        AudioServicesPlaySystemSound(self.systemSoundID1)
-                        sleep(1)
-                    }
-                    else{
-                        break
-                    }
-                
-                DispatchQueue.main.async {
-                    if(presenting == false){
-                        presenting = true
-                    print("We finished that.")
-                    //Send alert to indicate time's up.
-                    let alert = UIAlertController(title: "Alert!", message: "Timer 1 is done!", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
-                        switch action.style{
-                        case .default:
-                            print("default")
-                            self.tappedOk1 = true
-                            break
-                        case .cancel:
-                            print("cancel")
-                            
-                        case .destructive:
-                            print("destructive")
-                        }
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-            
-            
-            }
-            
-            
-        } else {
+        }else {
             sec1 -= 1
             countdownLabel1.text = timeString(time: TimeInterval(sec1))
         }
@@ -317,50 +308,6 @@ class ViewController: UIViewController {
     func updateTimer2() {
         if sec2 < 1 {
             timer2.invalidate()
-            self.tappedOk2 = false
-            var presenting = false
-
-            
-            
-            DispatchQueue.global(qos: .background).async {
-                print("Run on background thread")
-                for _ in 0 ... 15{
-                    if(self.tappedOk2 == false){
-                        AudioServicesPlaySystemSound(self.systemSoundID2)
-                        sleep(1)
-                    }
-                    else{
-                        break
-                    }
-                    
-                    DispatchQueue.main.async {
-                        if(presenting == false){
-                            presenting = true
-                        print("We finished that.")
-                        //Send alert to indicate time's up.
-                        let alert = UIAlertController(title: "Alert!", message: "Timer 2 is done!", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
-                            switch action.style{
-                            case .default:
-                                print("default")
-                                self.tappedOk2 = true
-                                break
-                            case .cancel:
-                                print("cancel")
-                                
-                            case .destructive:
-                                print("destructive")
-                            }
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-                }
-                
-                
-            }
-            
-            
         } else {
             sec2 -= 1
             countdownLabel2.text = timeString(time: TimeInterval(sec2))
@@ -370,49 +317,6 @@ class ViewController: UIViewController {
     func updateTimer3() {
         if sec3 < 1 {
             timer3.invalidate()
-            self.tappedOk3 = false
-            var presenting = false
-
-            
-            
-            DispatchQueue.global(qos: .background).async {
-                print("Run on background thread")
-                for _ in 0 ... 15{
-                    if(self.tappedOk3 == false){
-                        AudioServicesPlaySystemSound(self.systemSoundID3)
-                        sleep(1)
-                    }
-                    else{
-                        break
-                    }
-                    
-                    DispatchQueue.main.async {
-                        if(presenting == false){
-                            presenting = true
-                        print("We finished that.")
-                        //Send alert to indicate time's up.
-                        let alert = UIAlertController(title: "Alert!", message: "Timer 3 is done!", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { action in
-                            switch action.style{
-                            case .default:
-                                print("default")
-                                self.tappedOk3 = true
-                                break
-                            case .cancel:
-                                print("cancel")
-                                
-                            case .destructive:
-                                print("destructive")
-                            }
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-                }
-                
-            }
-            
-            
         } else {
             sec3 -= 1
             countdownTimer3.text = timeString(time: TimeInterval(sec3))
@@ -425,6 +329,11 @@ class ViewController: UIViewController {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+    
+   
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(UNNotificationPresentationOptions.alert)
     }
 
 }

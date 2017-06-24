@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B178CBE1EFDD85700AF6959 /* mountainAlarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = mountainAlarm.caf; path = ../../../Downloads/mountainAlarm.caf; sourceTree = "<group>"; };
 		9B348E8D1EFC06DA00CA14AD /* MultiTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B348E901EFC06DA00CA14AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B348E921EFC06DA00CA14AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				9B7B7B6C1EFDC3FB003D18DF /* mountainAlarm.wav */,
+				9B178CBE1EFDD85700AF6959 /* mountainAlarm.caf */,
 				9B7B7B6E1EFDC77F003D18DF /* bicycleAlarm.wav */,
 				9B7B7B6F1EFDC77F003D18DF /* heavyAlarm.wav */,
 				9B348E901EFC06DA00CA14AD /* AppDelegate.swift */,
