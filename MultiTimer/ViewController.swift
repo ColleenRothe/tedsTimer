@@ -166,7 +166,7 @@ class ViewController: UIViewController {
         let notification = UILocalNotification()
         notification.fireDate = someTime
         notification.alertBody = "Timer 1 Finished!" // text that will be displayed in the notification
-        notification.soundName = "mountainAlarm.wav"
+        notification.soundName = "africaAlarm.wav"
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
@@ -180,7 +180,7 @@ class ViewController: UIViewController {
         let notification = UILocalNotification()
         notification.fireDate = someTime
         notification.alertBody = "Timer 2 Finished!" // text that will be displayed in the notification
-        notification.soundName = "bicycleAlarm.wav"
+        notification.soundName = "degrawAlarm.wav"
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
