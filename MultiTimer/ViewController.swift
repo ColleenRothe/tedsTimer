@@ -10,7 +10,7 @@
 //https://github.com/jen2/swift-timer-demo/blob/master/Swift-Timer-Tutorial/ViewController.swift
 //https://oleb.net/blog/2014/02/alarm-clock-apps-ios/
 //https://stackoverflow.com/questions/31126124/using-existing-system-sounds-in-ios-app-swift
-
+//https://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
 
 import UIKit
 import AVFoundation
@@ -99,11 +99,20 @@ class ViewController: UIViewController {
         hours3.keyboardType = .numberPad
         minutes3.keyboardType = .numberPad
         seconds3.keyboardType = .numberPad
+        
+        //dismiss keyboard...
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
     @IBAction func clickGo1(_ sender: Any) {

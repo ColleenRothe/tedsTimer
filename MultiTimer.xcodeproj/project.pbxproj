@@ -17,6 +17,7 @@
 		9B6C92561F008F640068F82B /* heavyAlarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B6C92551F008F640068F82B /* heavyAlarm.wav */; };
 		9B6C92581F008F7D0068F82B /* africaAlarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B6C92571F008F7D0068F82B /* africaAlarm.wav */; };
 		9B6C925A1F008F850068F82B /* degrawAlarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9B6C92591F008F850068F82B /* degrawAlarm.wav */; };
+		9BFE802F1F0092CF005C616E /* MultiTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE802D1F0092CF005C616E /* MultiTimer.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		9B6C92551F008F640068F82B /* heavyAlarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = heavyAlarm.wav; sourceTree = "<group>"; };
 		9B6C92571F008F7D0068F82B /* africaAlarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = africaAlarm.wav; sourceTree = "<group>"; };
 		9B6C92591F008F850068F82B /* degrawAlarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = degrawAlarm.wav; sourceTree = "<group>"; };
+		9BFE802E1F0092CF005C616E /* MultiTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MultiTimer.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				9B6C92571F008F7D0068F82B /* africaAlarm.wav */,
 				9B6C92591F008F850068F82B /* degrawAlarm.wav */,
 				9B348E901EFC06DA00CA14AD /* AppDelegate.swift */,
+				9BFE802D1F0092CF005C616E /* MultiTimer.xcdatamodeld */,
 				9B348E921EFC06DA00CA14AD /* ViewController.swift */,
 				9B348E941EFC06DA00CA14AD /* Main.storyboard */,
 				9B348E971EFC06DA00CA14AD /* Assets.xcassets */,
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B348E931EFC06DA00CA14AD /* ViewController.swift in Sources */,
+				9BFE802F1F0092CF005C616E /* MultiTimer.xcdatamodeld in Sources */,
 				9B348E911EFC06DA00CA14AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +549,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9BFE802D1F0092CF005C616E /* MultiTimer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9BFE802E1F0092CF005C616E /* MultiTimer.xcdatamodel */,
+			);
+			currentVersion = 9BFE802E1F0092CF005C616E /* MultiTimer.xcdatamodel */;
+			path = MultiTimer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9B348E851EFC06DA00CA14AD /* Project object */;
 }
